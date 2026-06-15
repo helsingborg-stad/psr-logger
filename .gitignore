@@ -1,0 +1,9 @@
+/vendor/
+.phpunit.result.cache
+.coverage
+/coverage/
+.watch
+/generate.log
+/wordpress
+phpunit-log.xml
+phpunit-testdox.txt

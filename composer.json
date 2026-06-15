@@ -1,0 +1,46 @@
+{
+    "name": "helsingborg-stad/psr-logger",
+    "description": "Implementation of PSR-3: Logger Interface.",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PsrLogger\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PsrLogger\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nikolas Ramstedt",
+            "email": "nikolas.ramstedt@helsingborg.se"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "psr/log": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11",
+        "phpstan/phpstan": "^2.1",
+        "carthage-software/mago": "^1.30"
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit --testdox --no-coverage",
+        "test:coverage": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --testdox",
+        "test:watch": "bash -c 'touch .watch; while true; do changed=$(find src tests -name \"*.php\" -newer .watch -print -quit 2>/dev/null); if [ -n \"$changed\" ]; then touch .watch; clear; ./vendor/bin/phpunit --testdox --no-coverage; fi; sleep 1; done'",
+        "lint": "vendor/bin/mago lint",
+        "fix": "vendor/bin/mago lint --format-after-fix --fix",
+        "format": "vendor/bin/mago fmt",
+        "stan": "php -d memory_limit=512M vendor/bin/phpstan analyse --configuration=phpstan.neon"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "carthage-software/mago": true
+        }
+    },
+    "version": "0.1.0"
+}

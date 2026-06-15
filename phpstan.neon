@@ -1,0 +1,12 @@
+# PHPStan Configuration File
+parameters:
+    level: 1
+    paths:
+        - src
+        - tests
+    bootstrapFiles:
+        - vendor/autoload.php
+    checkMissingTypehints: true
+    checkUnionTypes: true
+    checkExplicitMixed: true
+    reportUnmatchedIgnoredErrors: true
