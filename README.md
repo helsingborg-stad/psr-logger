@@ -5,7 +5,7 @@ A PSR-3 compatible logger factory with namespace breadcrumbs, log-level filterin
 ## Requirements
 
 - PHP **8.2** or higher
-- [`psr/log`](https://packagist.org/packages/psr/log) **^3.0**
+- [`psr/log`](https://packagist.org/packages/psr/log) **^2.0 || ^3.0**
 
 ## Installation
 With composer:
