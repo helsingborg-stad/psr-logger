@@ -1,0 +1,49 @@
+name: Coverage Badge
+
+on:
+  push:
+    branches: [ "main", "chore/coverage-badge" ]
+
+jobs:
+  coverage:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup PHP with xdebug
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3'
+        tools: composer:v2
+        coverage: xdebug
+
+    - name: Get Composer Cache Directory
+      id: composer-cache
+      run: |
+        echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+    - uses: actions/cache@v3
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-
+
+    - name: Remove installer paths
+      run: composer config --unset extra.installer-paths
+
+    - name: Install dependencies
+      run: composer install --prefer-dist
+
+    - name: Run tests with coverage
+      run: composer test:coverage
+
+    - name: Generate and commit coverage badge
+      uses: timkrase/phpunit-coverage-badge@v1.2.1
+      with:
+        coverage_badge_path: coverage-badge.svg
+        push_badge: true
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
