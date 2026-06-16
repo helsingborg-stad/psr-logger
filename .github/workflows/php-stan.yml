@@ -2,7 +2,7 @@ name: PHP Stan
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "chore/coverage-badge" ]
   pull_request:
     branches: [ "main" ]
 
