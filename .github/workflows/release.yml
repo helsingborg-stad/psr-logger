@@ -2,7 +2,7 @@ name: Set tag and release
 
 on:
   workflow_run:
-    workflows: ["Unit Tests"]
+    workflows: ["Coverage Badge"]
     branches: [main]
     types: 
       - completed
