@@ -2,7 +2,7 @@ name: Unit Tests
 
 on:
   push:
-    branches: [ "main", "chore/coverage-badge" ]
+    branches: [ "main", "ci/**" ]
   pull_request:
     branches: [ "main" ]
 
