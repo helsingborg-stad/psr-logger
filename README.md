@@ -1,5 +1,7 @@
 # PSR Logger
 
+[![Lint](https://github.com/helsingborg-stad/psr-logger/actions/workflows/php-lint.yml/badge.svg?branch=main)](https://github.com/helsingborg-stad/psr-logger/actions/workflows/php-lint.yml)
+[![Stan](https://github.com/helsingborg-stad/psr-logger/actions/workflows/php-stan.yml/badge.svg?branch=main)](https://github.com/helsingborg-stad/psr-logger/actions/workflows/php-stan.yml)
 [![Build](https://github.com/helsingborg-stad/psr-logger/actions/workflows/php-test.yml/badge.svg?branch=main)](https://github.com/helsingborg-stad/psr-logger/actions/workflows/php-test.yml)
 ![Tests](test-badge.svg)
 ![Coverage](coverage-badge.svg)
