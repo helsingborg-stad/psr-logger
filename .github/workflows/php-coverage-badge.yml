@@ -41,10 +41,43 @@ jobs:
     - name: Run tests with coverage
       run: composer test:coverage
 
-    - name: Generate and commit coverage badge
+    - name: Generate coverage badge
       uses: timkrase/phpunit-coverage-badge@v1.2.1
       with:
         coverage_badge_path: coverage-badge.svg
-        push_badge: true
+        push_badge: false
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         report: coverage/clover.xml
+
+    - name: Extract test counts
+      id: test-counts
+      run: |
+        python3 - <<'EOF'
+        import xml.etree.ElementTree as ET, os
+        tree = ET.parse('phpunit-log.xml')
+        root = tree.getroot()
+        suite = root.find('testsuite')
+        tests    = int(suite.get('tests',    0))
+        failures = int(suite.get('failures', 0))
+        errors   = int(suite.get('errors',   0))
+        skipped  = int(suite.get('skipped',  0))
+        passed   = tests - failures - errors - skipped
+        color    = 'red' if (failures + errors) > 0 else 'brightgreen'
+        with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+            f.write(f'passed={passed}\n')
+            f.write(f'color={color}\n')
+        EOF
+
+    - name: Generate test count badge
+      run: |
+        curl -fsSL \
+          "https://img.shields.io/badge/tests-${{ steps.test-counts.outputs.passed }}%20passed-${{ steps.test-counts.outputs.color }}.svg" \
+          -o test-badge.svg
+
+    - name: Commit and push badges
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add coverage-badge.svg test-badge.svg
+        git diff --staged --quiet || git commit -m "Update badges"
+        git push
