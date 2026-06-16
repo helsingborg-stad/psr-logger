@@ -85,9 +85,11 @@ jobs:
           -o test-badge.svg
 
     - name: Commit and push badges
+      env:
+        PUSH_BRANCH: ${{ github.event_name == 'workflow_dispatch' && github.ref_name || github.event.workflow_run.head_branch }}
       run: |
         git config user.name "GitHub Actions Bot"
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git add coverage-badge.svg test-badge.svg
         git diff --staged --quiet || git commit -m "Update badges [skip ci]"
-        git push origin HEAD:${{ github.event_name == 'workflow_dispatch' && github.ref_name || github.event.workflow_run.head_branch }}
+        git push origin HEAD:"${PUSH_BRANCH}"
