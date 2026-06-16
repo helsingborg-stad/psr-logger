@@ -2,7 +2,7 @@ name: Set tag and release
 
 on:
   workflow_run:
-    workflows: ["Unit Tests"]
+    workflows: ["Generate pre release badges"]
     branches: [main]
     types: 
       - completed

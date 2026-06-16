@@ -1,5 +1,11 @@
 # PSR Logger
 
+[![Lint](https://github.com/helsingborg-stad/psr-logger/actions/workflows/php-lint.yml/badge.svg?branch=main)](https://github.com/helsingborg-stad/psr-logger/actions/workflows/php-lint.yml)
+[![Stan](https://github.com/helsingborg-stad/psr-logger/actions/workflows/php-stan.yml/badge.svg?branch=main)](https://github.com/helsingborg-stad/psr-logger/actions/workflows/php-stan.yml)
+[![Build](https://github.com/helsingborg-stad/psr-logger/actions/workflows/php-test.yml/badge.svg?branch=main)](https://github.com/helsingborg-stad/psr-logger/actions/workflows/php-test.yml)
+![Tests](test-badge.svg)
+![Coverage](coverage-badge.svg)
+
 A PSR-3 compatible logger factory with namespace breadcrumbs, log-level filtering, and context placeholder interpolation. See the [full PSR-3 specification](https://www.php-fig.org/psr/psr-3/) for the interface contract this library implements.
 
 ## Requirements
