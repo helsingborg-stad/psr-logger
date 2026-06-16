@@ -1,4 +1,4 @@
-name: Coverage Badge
+name: Generate pre release badges
 
 on:
   workflow_run:
